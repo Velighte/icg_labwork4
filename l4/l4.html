@@ -1,0 +1,157 @@
+<html> 
+    <head> 		
+        <script type='text/javascript' src="http://x3dom.org/release/x3dom-full.js"> </script> 
+        <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link> 
+    </head> 
+        <body> 
+            <h1>Лабораторная работа №4 </h1> 
+            <p> 
+                Группирование. Гиперссылки. Тиражирование. Встраивание. Освещение. Навигация.  
+            </p> 
+            <x3d width='1200px' height='500px'> 
+                <scene>
+                    
+                        <!--использование DEF USE на box-->
+                        <!-- Anchor - гиперссылка на 3 лабу--> 
+                        <transform translation='0 0 5'>
+                            <Anchor url="file:///C:/Users/VeLighTe/Google%20%D0%94%D0%B8%D1%81%D0%BA/%D0%92%D1%83%D0%B7/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0/L3/l3/l3.html" >
+                            <shape DEF='MyBox'> <!--DEF shape-->
+                                <appearance>      
+                                    <imageTexture url='https://image.ibb.co/i6JKWS/1_WALLPAPER.jpg'> </imageTexture>
+                                </appearance>         
+                                <Box size='5 5 5'></Box> 
+                            </shape>
+                        </transform> 
+
+                        <transform DEF='right 10' translation='10 0 0'> <!--DEF transform-->                      
+                           <shape USE='MyBox'></shape> <!--USE shape-->
+                        </transform>
+
+                        <transform translation='-20 -10 0'>
+                            <transform USE='right 10'></transform> <!--USE transform-->
+                        </transform>
+
+                        <transform translation='-20 0 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+                            
+                        <transform translation='-20 10 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+    
+                        <transform translation='-10 10 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+
+                        <transform translation='-10 -10 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+                            
+                        <transform translation='0 10 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+    
+                        <transform translation='0 -10 0'>
+                            <transform USE='right 10'></transform>
+                        </transform>
+
+                         <!--использование DEF USE на Group-->
+                        <Group DEF="Gr1">
+                            <transform translation='-15 -15 -5'>
+                                <shape DEF='MyBox2'> 
+                                    <appearance> 
+                                        <imageTexture url='https://image.ibb.co/kJnAo7/3_WALLPAPER.jpg'> </imageTexture> 
+                                    </appearance>          
+                                    <Box size='5 5 5'></Box> 
+                                </shape>                             
+                            </transform>
+
+                            <transform translation='-15 -5 -5'>
+                                <shape USE='MyBox2'></shape>
+                            </transform>
+
+                            <transform translation='-15 5 -5'>
+                                <shape USE='MyBox2'></shape>
+                            </transform>
+
+                            <transform translation='-15 15 -5'>
+                                <shape USE='MyBox2'></shape>
+                            </transform>
+                        </Group>
+
+                        <transform translation='10 0 0'>
+                            <Group USE="Gr1"></Group>
+                        </transform>
+
+                        <transform translation='20 0 0'>
+                            <Group USE="Gr1"></Group>
+                        </transform>
+
+                        <transform translation='30 0 0'>
+                            <Group USE="Gr1"></Group>
+                        </transform>
+
+                        <!--использование inline -->                        
+                        <!--Для обхода вечной загрузки в браузере надо запустить браузер с локальным доступом -->
+                        <!-- 1. Запустить cmd и набрать cd C:\Program Files (x86)\Google\Chrome\Application -->
+                        <!-- 2. chrome --allow-file-access-from-files file:///C:/test%20-%203.html -->
+                        <transform translation='0 0 7.2' rotation='1 0 0 1.5839'>
+                            <inline url="time.x3d"> </inline>
+                        </transform>
+
+                        <!--точечный источник света на поверхности box-->
+                        <PointLight  intensity='1' color='0 0 1' location='0 0 -30 ' radius='100.0' >  </PointLight> 
+
+                        <transform translation='0 0 -50'>
+                            <shape> 
+                                <appearance> 
+                                    <material diffuseColor='#ffffff'></material> 
+                                </appearance>         
+                                <Box size='1000 1000 0'></Box> 
+                            </shape>
+                        </transform>
+
+                        <!--источник направленного освещения, создает тени-->
+                        <directionalLight color='1 1 1' direction='0  0 -90' intensity='0.1' shadowIntensity='0.6'> </directionalLight> 
+
+                        <!--источник направленного конического освещения, световое пятно с размытием.-->
+                        <SpotLight  direction='0 90 0' beamWidth='0.2' color='1 0 1' cutOffAngle='0.4' location='0 -20 10' radius='150' >  </SpotLight>
+
+                        <transform translation='0 100 0'>
+                            <shape> 
+                                <appearance> 
+                                    <material diffuseColor='#ffffff'></material> 
+                                </appearance>         
+                                <Box size='200 0 200'></Box> 
+                            </shape>
+                        </transform>
+
+                        <!--туман, visibilityRange - дальность от наблюдателя, при которой наступает туман -->
+                        <Fog  color='0,0,0'  fogType='"LINEAR"' visibilityRange='2500' ></Fog>
+                    
+                        <!--местоположение и ориентация точек наблюдения. -->
+                        <Viewpoint position="0 -80 20" orientation="1 0 0 1.5839" description="camera"></Viewpoint>
+                        <Viewpoint position="0 -15 20" orientation="1 0 0 1.0" description="camera"></Viewpoint>
+                        <Viewpoint position="0  80 20" orientation="0 1 1 3.16" description="camera"></Viewpoint>                   
+
+                        <!--Активируется нажатием клавиши "f".-->
+                        <!-- Двигаться вперед ЛКМ-->
+                        <!--Двигаться назад ПКМ-->
+                        <NavigationInfo avatarSize='[10,1.6,0.75]' headlight='true' speed='20'  type='["FLY"]' ></NavigationInfo>
+                                         
+                        <!-- Синий цилиндр через который аватар не может пройти-->
+                        <transform translation='30 0 20'>
+                            <Collision enabled='true'> <!-- enabled – при значении true проверка на столкновения аватара с объектами осуществляется, при значении false нет.-->                           
+                                <Shape>
+                                    <Appearance>
+                                        <material diffuseColor='#0000ff'></material>
+                                    </Appearance>
+                                    <Cylinder height='2' radius='12'> </Cylinder> 
+                                </Shape>
+                            </Collision>
+                        </transform>
+
+                </scene> 
+            </x3d>
+        </body> 
+</html>
